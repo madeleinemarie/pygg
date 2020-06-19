@@ -10,6 +10,17 @@
 <body>
     <header>
         <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>Dashboard</li>
+                    <li>View Bills</li>
+                    <li>View By Category</li>
+                    <li><a href="{% url 'logout' %}">Log Out</a></li>
+                {% else %}
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                    <li><a href="{% url 'login' %}">Log In</a></li>
+                {% endif %}
+            </ul>
         </nav>
     </header>
     <main>
