@@ -2,24 +2,30 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pygg</title>
 </head>
+
 <body>
     <header>
         <nav>
             <ul>
                 {% if user.is_authenticated %}
-                    <li>Dashboard</li>
-                    <li>View Bills</li>
-                    <li>View By Category</li>
-                    <li><a href="{% url 'logout' %}">Log Out</a></li>
+                <li>Dashboard</li>
+                <li>View Bills</li>
+                <li>View By Category</li>
+                <li><a href="{% url 'logout' %}">Log Out</a></li>
+                <p>Welcome, {{ user }}!</p>
+                <p>Your monthly budget is: ${{ user.userinfo.budget }}</p>
                 {% else %}
-                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                    <li><a href="{% url 'login' %}">Log In</a></li>
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                <li><a href="{% url 'login' %}">Log In</a></li>
                 {% endif %}
+                <hr>
+
             </ul>
         </nav>
     </header>
@@ -28,4 +34,5 @@
         {% endblock %}
     </main>
 </body>
+
 </html>
