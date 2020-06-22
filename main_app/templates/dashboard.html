@@ -1,18 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="grey lighten-5" id="user-panel">
-    <div class="container row">
-        <div class="col s12 m9">
-            <h3>Welcome, {{ user }}!</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </div>
-        <div class="col s12 m3 right-align" id="user-panel-budget">
-            {% if user.userinfo.budget %}
-            <p>Your monthly budget is:<br>${{ user.userinfo.budget }}</p>
-            {% endif %}
-        </div>
-    </div>
-</div>
 <a href="{% url 'bills' %}"" class="waves-effect waves-light btn">View All Bills</a>
 
 {% endblock %}

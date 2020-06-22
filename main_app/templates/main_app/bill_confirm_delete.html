@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h3>Delete this bill?</h3>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Confirm" class="btn">
+        <a href="{% url 'bills'%}">Cancel</a>
+    </form>
+{% endblock %}
