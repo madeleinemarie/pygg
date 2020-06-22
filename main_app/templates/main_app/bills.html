@@ -1,13 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
 <h3>All Bills</h3>
-{% for bill in object_list %}
-    <li>{{ bill.name }} - Due: {{ bill.dueDate }} 
-        <a href="{% url 'bills_update' bill.id %}" class="waves-effect waves-light btn-small"><i class="tiny material-icons left">create</i>Edit</a>
-        <a href="{% url 'bills_delete' bill.id %}" class="waves-effect waves-light btn-small"><i class="tiny material-icons left">delete</i>Delete</a>
-    </li>
-{% empty %}
-    <li>No bills yet.</li>
-{% endfor %}
+<table class="striped">
+    <thead>
+        <tr>
+          <th>Category</th>
+          <th>Name</th>
+          <th>Due Date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+    {% for bill in object_list %}
+      <tr>
+        <td>{{ bill.get_category_display }}</td>
+        <td>{{ bill.name }}</td>
+        <td>{{ bill.dueDate }}</td>
+        <td class="right-align"> 
+            <a href="{% url 'bills_update' bill.id %}" class="waves-effect waves-light btn-small btn-floating"><i class="tiny material-icons left">create</i>Edit</a>
+            <a href="{% url 'bills_delete' bill.id %}" class="waves-effect waves-light btn-small btn-floating"><i class="tiny material-icons left">delete</i>Delete</a></td>
+      </tr>
+    {% empty %}
+    <tr>
+        <td>No bills yet.</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
 <a href="{% url 'bills_create' %}" class="waves-effect waves-light btn">Add Bill</a>
 {% endblock %}
