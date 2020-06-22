@@ -4,6 +4,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserInfoForm
 from .models import User, Bill, UserInfo
+from django.db.models import Sum, Count
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 class BillList(ListView):
@@ -32,18 +33,23 @@ def home(request):
 
 def dashboard(request):
     bills = Bill.objects.filter(user=request.user)
-    return render(request, 'dashboard.html', { 'bills': bills })
+    context = {
+        'bills': bills,
+        'categories': bills.annotate(category_amount=Sum('amount')),
+        'total_bills': bills.aggregate(Sum('amount')),
+    }
+    return render(request, 'dashboard.html', context)
 
 def signup(request):
     error_message = ''
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
-        info_form = UserInfoForm(request.POST) #This is to add the budget info into the User Creation form   
+        info_form = UserInfoForm(request.POST) 
         if form.is_valid() and info_form.is_valid():
             user = form.save()
-            info = info_form.save(commit=False) #Stores the budget value, commit=false will keep it in an 'unsaved' state so we can save to user at the same time
-            info.user = user #assigns user to the UserInfo model (For the 1-to-1 relationship)
-            info.save() ## Saves to UserInfo model
+            info = info_form.save(commit=False)
+            info.user = user
+            info.save()
             login(request, user)
             return redirect('/')
         else:
@@ -52,7 +58,7 @@ def signup(request):
     info_form = UserInfoForm()
     context = {
         'form': form,
-        'info_form': info_form, #passes user info form to doc
+        'info_form': info_form,
         'error_message': error_message
     }
     return render(request, 'registration/signup.html', context)
