@@ -1,0 +1,9 @@
+#user-panel {
+    min-height: 13rem;
+}
+
+@media (max-width:600px) {
+    #user-panel, #user-panel-budget {
+        text-align: center;
+    }
+}
