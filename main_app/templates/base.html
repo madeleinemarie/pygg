@@ -8,38 +8,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <title>Pygg</title>
 </head>
 
 <body>
     <header>
         <nav>
-            <div class="nav-wrapper">
-                <ul>
-                    <li><a href="{% url 'home' %}">PGGY</a></li>
-                </ul>
-                {% if user.is_authenticated %}
-                <ul class="hide-on-small-only">
-                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-                    <li><a href="{% url 'bills' %}">View Bills</a></li>
-                    <li><a href="#">View By Category</a></li>
-                </ul>
-                <ul class="right">
-                    <li><a href="{% url 'logout' %}">Log Out</a></li>
-                </ul>
+            <div class="nav-wrapper grey darken-3">
+                <div class="container">
+                    <ul>
+                        <li><a href="{% url 'home' %}" class="logo">&nbsp;</a></li>
+                        {% if user.is_authenticated %}
+                        <a href="#" data-target="sidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                        <ul class="hide-on-med-and-down">
+                            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                            <li><a href="{% url 'bills' %}">View Bills</a></li>
+                            <li><a href="#">View By Category</a></li>
+                        </ul>
+                        <ul class="sidenav" id="sidenav">
+                            <li><a href="{% url 'home' %}" class="logo">&nbsp;</a></li>
+                            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                            <li><a href="{% url 'bills' %}">View Bills</a></li>
+                            <li><a href="#">View By Category</a></li>
+                            <li><a href="{% url 'logout' %}" title="Log Out">Log Out</a></li>
+                        </ul>
+                    </ul>
+                    <ul class="right">
+                        <li><a href="{% url 'logout' %}" title="Log Out"><i class="material-icons">exit_to_app</i></a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
-        <div class="grey lighten-5" id="user-panel">
+        <div class="pink lighten-4" id="user-panel">
             <div class="container row">
-                <div class="col s12 m9">
+                <div class="col s12 l9">
                     <h3>Welcome, {{ user }}!</h3>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </div>
-                <div class="col s12 m3 right-align" id="user-panel-budget">
+                <div class="col s12 l3 right-align" id="user-panel-budget">
                     <p>Your monthly budget is:<br>${{ user.userinfo.budget }}</p>
                 </div>
             </div>
@@ -59,5 +67,11 @@
         {% endblock %}
         </div>
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems);
+        });
+    </script>
 </body>
 </html>
