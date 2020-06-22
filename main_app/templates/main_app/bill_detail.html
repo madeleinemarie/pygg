@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>{{ object.name }}</h2>
+    <h1>${{ object.amount }}</h1>
+    <p>{{ object.description }}</p>
+    <h4>Due: {{ object.dueDate }}</h4>
+    <h4>Other {{ object.get_category_display }} bills:</h4>
+    {% if same_category.count %}
+        {% for category_bill in same_category|slice:":5" %}
+            <li>
+                <a href="{% url 'bill_detail' category_bill.id %}">{{ category_bill.name }}</a>         
+            </li>
+        {% endfor %}
+    {% else %}
+        <h5>No other bills of this category</h5>
+    {% endif %}
+{% endblock %}
