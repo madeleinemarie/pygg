@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserInfoForm
-from .models import User, Bill, UserInfo
+from .models import User, Bill, UserInfo, CATEGORIES
 from django.db.models import Sum, Count
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
@@ -31,12 +31,21 @@ class BillDelete(DeleteView):
 def home(request):
     return render(request, 'home.html')
 
+def categoryList(request):
+    return render(request, 'main_app/categories.html')
+
 def dashboard(request):
     bills = Bill.objects.filter(user=request.user)
+    categories_total = {}
+    for x in CATEGORIES:
+        c = bills.filter(category=x[0])
+        t = c.aggregate(Sum('amount'))
+        if t['amount__sum']:
+            categories_total[x[1]] = t['amount__sum']
     context = {
         'bills': bills,
-        'categories': bills.annotate(category_amount=Sum('amount')),
         'total_bills': bills.aggregate(Sum('amount')),
+        'categories_total': categories_total,
     }
     return render(request, 'dashboard.html', context)
 
