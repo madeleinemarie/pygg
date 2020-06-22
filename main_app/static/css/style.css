@@ -9,6 +9,10 @@
     background-size: 85%;
 }
 
+.test {
+    border: 1px solid red;
+}
+
 @media (max-width:992px) {
     #user-panel, #user-panel-budget {
         text-align: center;

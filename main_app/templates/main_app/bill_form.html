@@ -15,14 +15,16 @@
     </form>
   
     <script>
-        let dateEl = document.getElementById('id_dueDate');
-        M.Datepicker.init(dateEl, {
-            format: 'yyyy-mm-dd',
-            defaultDate: new Date(),
-            setDefaultDate: true,
-            autoClose: true
+        document.addEventListener('DOMContentLoaded', function() {
+            let dateEl = document.getElementById('id_dueDate');
+            M.Datepicker.init(dateEl, {
+                format: 'yyyy-mm-dd',
+                defaultDate: new Date(),
+                setDefaultDate: true,
+                autoClose: true
+            });
+            let selectEl = document.getElementById('id_category');
+            M.FormSelect.init(selectEl);
         });
-        let selectEl = document.getElementById('id_category');
-        M.FormSelect.init(selectEl);
     </script>
 {% endblock %}

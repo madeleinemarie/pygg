@@ -69,8 +69,8 @@
     </main>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.sidenav');
-            var instances = M.Sidenav.init(elems);
+            let sidenav = document.getElementById('sidenav');
+            M.Sidenav.init(sidenav)
         });
     </script>
 </body>
