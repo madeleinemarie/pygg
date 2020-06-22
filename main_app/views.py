@@ -3,10 +3,27 @@ from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserInfoForm
-from .models import User
+from .models import User, Bill, UserInfo
+from django.views.generic import ListView, CreateView
+
+class BillList(ListView):
+    model = Bill
+    template_name = 'main_app/bills.html'
+
+class BillCreate(CreateView):
+    model = Bill
+    fields = ['name', 'description', 'amount', 'dueDate', 'category']
+    success_url = '/bills/'
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 def home(request):
     return render(request, 'home.html')
+
+def dashboard(request):
+    bills = Bill.objects.filter(user=request.user)
+    return render(request, 'dashboard.html', { 'bills': bills })
 
 def signup(request):
     error_message = ''
