@@ -4,7 +4,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserInfoForm
 from .models import User, Bill, UserInfo
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 
 class BillList(ListView):
     model = Bill
@@ -17,6 +17,11 @@ class BillCreate(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+class BillUpdate(UpdateView):
+    model = Bill
+    fields = ['name', 'description', 'amount', 'dueDate', 'category']
+    success_url = '/bills/'
 
 def home(request):
     return render(request, 'home.html')

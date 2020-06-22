@@ -7,4 +7,5 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('bills/', views.BillList.as_view(), name='bills'),
     path('bills/create/', views.BillCreate.as_view(), name='bills_create'),
+    path('bills/<int:pk>/update/', views.BillUpdate.as_view(), name='bills_update'),
 ]
