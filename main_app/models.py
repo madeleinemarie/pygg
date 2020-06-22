@@ -27,3 +27,9 @@ class Bill(models.Model):
         choices=CATEGORIES,
         default=CATEGORIES[0][0]
     )
+
+    # def __str__(self):
+    #     return self.name
+
+    class Meta:
+        ordering = ['-dueDate']

@@ -9,5 +9,6 @@ urlpatterns = [
     path('bills/create/', views.BillCreate.as_view(), name='bills_create'),
     path('bills/<int:pk>/update/', views.BillUpdate.as_view(), name='bills_update'),
     path('bills/<int:pk>/delete/', views.BillDelete.as_view(), name='bills_delete'),
-    path('dashboard/update', views.budget_update, name='budget_update')
+    path('dashboard/update', views.budget_update, name='budget_update'),
+    path('categories/', views.categoryList, name='categories'),
 ]
