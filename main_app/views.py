@@ -40,6 +40,13 @@ def dashboard(request):
     }
     return render(request, 'dashboard.html', context)
 
+def budget_update(request):
+    user_info = UserInfo.objects.get(user=request.user)
+    form = UserInfoForm(request.POST, instance=user_info)
+    if form.is_valid():
+        form.save()
+    return render(request, 'budget.html', { 'form' : form })
+
 def signup(request):
     error_message = ''
     if request.method == 'POST':
