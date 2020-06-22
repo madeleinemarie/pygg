@@ -5,11 +5,18 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import UserInfoForm
 from .models import User, Bill, UserInfo, CATEGORIES
 from django.db.models import Sum, Count
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 class BillList(ListView):
     model = Bill
     template_name = 'main_app/bills.html'
+
+class BillDetail(DetailView):
+    model = Bill
+    def get_context_data(self, **kwargs):
+        context = super(DetailView, self).get_context_data(**kwargs)
+        context['same_category'] = Bill.objects.filter(category=self.object.category).exclude(pk=self.object.id)
+        return context
 
 class BillCreate(CreateView):
     model = Bill

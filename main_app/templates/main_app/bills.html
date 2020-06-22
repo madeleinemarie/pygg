@@ -14,7 +14,7 @@
     {% for bill in object_list %}
       <tr>
         <td>{{ bill.get_category_display }}</td>
-        <td>{{ bill.name }}</td>
+        <td><a href="{% url 'bill_detail' bill.id %}">{{ bill.name }}</a></td>
         <td>{{ bill.dueDate }}</td>
         <td class="right-align"> 
             <a href="{% url 'bills_update' bill.id %}" class="waves-effect waves-light btn-small btn-floating"><i class="tiny material-icons left">create</i>Edit</a>
