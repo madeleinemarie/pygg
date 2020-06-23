@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load date_extras %}
 {% block content %}
 <h3>All Bills</h3>
 <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Sort By</a>
@@ -22,7 +23,7 @@
       <tr>
         <td>{{ bill.get_category_display }}</td>
         <td><a href="{% url 'bill_detail' bill.id %}">{{ bill.name }}</a></td>
-        <td>{{ bill.dueDate }}</td>
+        <td>{{ bill.dueDate|daysuntil }}</td>
         <td class="right-align"> 
             <a href="{% url 'bills_update' bill.id %}" class="waves-effect waves-light btn-small btn-floating"><i class="tiny material-icons left">create</i>Edit</a>
             <a href="{% url 'bills_delete' bill.id %}" class="waves-effect waves-light btn-small btn-floating"><i class="tiny material-icons left">delete</i>Delete</a></td>
