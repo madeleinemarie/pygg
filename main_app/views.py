@@ -10,6 +10,13 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 class BillList(ListView):
     model = Bill
     template_name = 'main_app/bills.html'
+    ordering = 'name'
+    def get_ordering(self):
+        return self.request.GET.get('ordering', 'name')
+    def get_context_data(self, *args, **kwargs):
+        context = super(BillList, self).get_context_data(*args, **kwargs)
+        context['current_order'] = self.get_ordering()
+        return context
 
 class BillDetail(DetailView):
     model = Bill

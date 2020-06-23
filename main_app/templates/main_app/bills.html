@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 <h3>All Bills</h3>
+<a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Sort By</a>
+<ul id='dropdown1' class='dropdown-content'>
+    <li><a href="{% url 'bills' %}?ordering=name">Name</a></li>
+    <li><a href="{% url 'bills' %}?ordering=-amount">Amount (Desc.)</a></li>
+    <li><a href="{% url 'bills' %}?ordering=amount">Amount (Asc.)</a></li>
+    <li><a href="{% url 'bills' %}?ordering=category">Category</a></li>
+</ul>
 <table class="striped">
     <thead>
         <tr>
@@ -28,4 +35,10 @@
     </tbody>
   </table>
 <a href="{% url 'bills_create' %}" class="waves-effect waves-light btn">Add Bill</a>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.dropdown-trigger');
+        var instances = M.Dropdown.init(elems);
+      });
+</script>
 {% endblock %}
