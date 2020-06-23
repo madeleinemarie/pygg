@@ -39,7 +39,19 @@ def home(request):
     return render(request, 'home.html')
 
 def categoryList(request):
-    return render(request, 'main_app/categories.html')
+    bills = Bill.objects.filter(user=request.user)
+    categories_total = {}
+    for x in CATEGORIES:
+        c = bills.filter(category=x[0])
+        t = c.aggregate(Sum('amount'))
+        if t['amount__sum']:
+            categories_total[x[1]] = t['amount__sum']
+    context = {
+        'bills': bills,
+        'total_bills': bills.aggregate(Sum('amount')),
+        'categories_total': categories_total,
+    }
+    return render(request, 'main_app/categories.html', context)
 
 def dashboard(request):
     bills = Bill.objects.filter(user=request.user)

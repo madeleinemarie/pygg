@@ -3,18 +3,23 @@
 <h3>Categories</h3>
 <table class="striped">
     <thead>
-        <tr>
+      <tr>
           <th>Category</th>
-          <th>Total Amount:</th>
+          <th class="right-align">Amount</th>
       </tr>
     </thead>
     <tbody>
+    {% for key,val in categories_total.items%}
       <tr>
-        <td></td>
+        <td>{{ key }}</td>
+        <td class="right-align" >{{ val }}</td>
       </tr>
+    {% empty %}
     <tr>
         <td>No bills yet.</td>
     </tr>
+    {% endfor %}
     </tbody>
   </table>
+</div>
 {% endblock %}
