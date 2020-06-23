@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load date_extras %}
 {% block content %}
 <div class="row">
     <div class="col s12 l6">
@@ -9,7 +10,8 @@
             <div class="card-content">
                 <h2 class="details-amount">${{ object.amount }}</h2>
                 <p>{{ object.description }}</p>
-                <h3>Due: {{ object.dueDate }}</3p>
+                <h3>Due: {{ object.dueDate }}</h3>
+                <h5>{{ object.dueDate|justdays }}</h5>
             </div>
             <div class="card-action">
                 <a href="{% url 'bills_update' bill.id %}" class="waves-effect waves-light btn-small btn-floating  z-depth-0""><i class=" tiny material-icons left">create</i>Edit</a>
