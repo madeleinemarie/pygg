@@ -12,16 +12,12 @@ import datetime
 class BillList(ListView):
     model = Bill
     template_name = 'main_app/bills.html'
-    ordering = 'name'
     def get_queryset(self):
-        return Bill.objects.filter(user=self.request.user)
-    def get_ordering(self):
-        return self.request.GET.get('ordering', 'name')
-    def get_context_data(self, *args, **kwargs):
-        context = super(BillList, self).get_context_data(*args, **kwargs)
-        context['current_order'] = self.get_ordering()
-        return context
-    
+        order_req = self.request.GET.get('ordering')
+        if order_req:
+            return Bill.objects.filter(user=self.request.user).order_by(order_req)
+        else:
+            return Bill.objects.filter(user=self.request.user)
 
 class BillDetail(DetailView):
     model = Bill
@@ -51,7 +47,7 @@ def home(request):
     return render(request, 'home.html')
 
 def categoryList(request):
-    bills = Bill.objects.filter(user=request.user)
+    bills = Bill.objects.filter(user=self.request.user)
     categories_total = {}
     for x in CATEGORIES:
         c = bills.filter(category=x[0])
