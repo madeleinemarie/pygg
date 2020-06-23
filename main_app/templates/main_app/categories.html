@@ -10,8 +10,8 @@
     </thead>
     <tbody>
     {% for key,val in categories_total.items%}
-      <tr>
-        <td>{{ key }}</td>
+    <tr id="category-row">
+        <td id="category-name">{{ key }}</td>
         <td class="right-align" >{{ val }}</td>
       </tr>
     {% empty %}

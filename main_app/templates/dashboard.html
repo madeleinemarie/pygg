@@ -23,7 +23,7 @@
                 </thead>
                 <tbody>
                     {% for bill in bills|slice:":5"%}
-                    <tr>
+                    <tr class="bill-row">
                         <td id="category-color" data-category="{{ bill.get_category_display }}"></td>
                         <td>{{ bill.name }}</td>
                         <td>{{ bill.dueDate }}</td>
@@ -54,7 +54,7 @@
                 <tbody>
                     {% for key,val in categories_total.items|slice:":5"%}
                     <tr id="category-row">
-                        <td>{{ key }}</td>
+                        <td id="category-name">{{ key }}</td>
                         <td class="right-align">{{ val }}</td>
                     </tr>
                     {% endfor %}
