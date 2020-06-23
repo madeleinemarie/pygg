@@ -17,7 +17,7 @@ class BillList(ListView):
         if order_req:
             return Bill.objects.filter(user=self.request.user).order_by(order_req)
         else:
-            return Bill.objects.filter(user=self.request.user)
+            return Bill.objects.filter(user=self.request.user).order_by('-dueDate')
 
 class BillDetail(DetailView):
     model = Bill
