@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 {% block content %}
 <div class="row">
@@ -5,66 +6,65 @@
         <canvas id="myChart" width="400" height="400"></canvas>
         <p>Total Budget: {{ user.userinfo.budget }}</p>
         <p>Total Amount: {{ total_bills.amount__sum }}</p>
-
     </div>
     <div class="col s12 l6">
         <div>
             <h4>Upcoming Bills</h4>
+            {% if bills.count %}
             <table class="striped bill-table">
                 <thead>
-                  <tr>
-                      <th></th>
-                      <th>Category</th>
-                      <th>Name</th>
-                      <th>Due Date</th>
-                      <th>Amount</th>
-                  </tr>
+                    <tr>
+                        <th></th>
+                        <th>Category</th>
+                        <th>Name</th>
+                        <th>Due Date</th>
+                        <th>Amount</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {% for bill in bills|slice:":5"%}
-                  <tr>
-                    <td id="category-color" data-category="{{ bill.get_category_display }}"></td>
-                    <td>{{ bill.name }}</td>
-                    <td>{{ bill.dueDate }}</td>
-                    <td>{{ bill.amount }}</td>
-                    <td class="right-align"> 
-                        <a href="{% url 'bills_update' bill.id %}" class="waves-effect waves-light btn-small btn-floating"><i class="tiny material-icons left">create</i>Edit</a>
-                        <a href="{% url 'bills_delete' bill.id %}" class="waves-effect waves-light btn-small btn-floating"><i class="tiny material-icons left">delete</i>Delete</a></td>
-                  </tr>
-                {% empty %}
-                <tr>
-                    <td>No bills yet.</td>
-                </tr>
-                {% endfor %}
+                    {% for bill in bills|slice:":5"%}
+                    <tr>
+                        <td id="category-color" data-category="{{ bill.get_category_display }}"></td>
+                        <td>{{ bill.name }}</td>
+                        <td>{{ bill.dueDate }}</td>
+                        <td>{{ bill.amount }}</td>
+                        <td class="right-align">
+                            <a href="{% url 'bills_update' bill.id %}" class="waves-effect waves-light btn-small btn-floating"><i class="tiny material-icons left">create</i>Edit</a>
+                            <a href="{% url 'bills_delete' bill.id %}" class="waves-effect waves-light btn-small btn-floating"><i class="tiny material-icons left">delete</i>Delete</a></td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
-              </table>
-              <a href="{% url 'bills' %}"" class=" waves-effect waves-light btn">View All Bills</a>
+            </table>
+            <a href="{% url 'bills' %}"" class=" waves-effect waves-light btn">View All Bills</a>
+            {% else %}
+            <p>No bills yet.</p>
+            <a href="{% url 'bills_create' %}" class="waves-effect waves-light btn">Add Bill</a>
+            {% endif %}
         </div>
         <div>
             <h4>Categories</h4>
+            {% if categories_total.items %}
             <table class="striped">
                 <thead>
-                  <tr>
-                      <th>Category</th>
-                      <th class="right-align">Amount</th>
-                  </tr>
+                    <tr>
+                        <th>Category</th>
+                        <th class="right-align">Amount</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {% for key,val in categories_total.items|slice:":5"%}
-                  <tr id="category-row">
-                    <td>{{ key }}</td>
-                    <td class="right-align" >{{ val }}</td>
-                  </tr>
-                {% empty %}
-                <tr>
-                    <td>No bills yet.</td>
-                </tr>
-                {% endfor %}
+                    {% for key,val in categories_total.items|slice:":5"%}
+                    <tr id="category-row">
+                        <td>{{ key }}</td>
+                        <td class="right-align">{{ val }}</td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
-              </table>
+            </table>
             <a href="{% url 'categories' %}" class="waves-effect waves-light btn">View All Categories</a>
+            {% else %}
+            <p>No categories yet.</p>
+            {% endif %}
         </div>
-</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
