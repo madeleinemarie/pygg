@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col s12 l6">
         <div class="card grey lighten-5 z-depth-0">
-            <div class='card-header red' id="category-color">
+            <div class='card-header' id="category-color" data-category="{{ object.get_category_display }}">
                 <h2>{{ object.name }}</h2>
             </div>
             <div class="card-content">
@@ -34,7 +34,7 @@
             <tbody>
                 {% for category_bill in same_category|slice:":5" %}
                 <tr>
-                    <td id="category-color" data-category="{{ bill.get_category_display }}"></td>
+                    <td id="category-color" data-category="{{ category_bill.get_category_display }}"></td>
                     <td>{{ category_bill.name }}</td>
                     <td>{{ category_bill.dueDate }}</td>
                     <td>{{ category_bill.amount }}</td>
