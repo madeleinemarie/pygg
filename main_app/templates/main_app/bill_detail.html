@@ -1,17 +1,52 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>{{ object.name }}</h2>
-    <h1>${{ object.amount }}</h1>
-    <p>{{ object.description }}</p>
-    <h4>Due: {{ object.dueDate }}</h4>
-    <h4>Other {{ object.get_category_display }} bills:</h4>
-    {% if same_category.count %}
-        {% for category_bill in same_category|slice:":5" %}
-            <li>
-                <a href="{% url 'bill_detail' category_bill.id %}">{{ category_bill.name }}</a>         
-            </li>
-        {% endfor %}
-    {% else %}
-        <h5>No other bills of this category</h5>
-    {% endif %}
+<div class="row">
+    <div class="col s12 l6">
+        <div class="card grey lighten-5 z-depth-0">
+            <div class='card-header red' id="category-color">
+                <h2>{{ object.name }}</h2>
+            </div>
+            <div class="card-content">
+                <h2 class="details-amount">${{ object.amount }}</h2>
+                <p>{{ object.description }}</p>
+                <h3>Due: {{ object.dueDate }}</3p>
+            </div>
+            <div class="card-action">
+                <a href="{% url 'bills_update' bill.id %}" class="waves-effect waves-light btn-small btn-floating  z-depth-0""><i class=" tiny material-icons left">create</i>Edit</a>
+                <a href="{% url 'bills_delete' bill.id %}" class="waves-effect waves-light btn-small btn-floating  z-depth-0""><i class=" tiny material-icons left">delete</i>Delete</a>
+            </div>
+        </div>
+    </div>
+    <div class="col s12 l6">
+        <h5>Other {{ object.get_category_display }} bills:</h5>
+        {% if same_category.count %}
+        <table class="striped bill-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Due Date</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category_bill in same_category|slice:":5" %}
+                <tr>
+                    <td id="category-color" data-category="{{ bill.get_category_display }}"></td>
+                    <td>{{ category_bill.name }}</td>
+                    <td>{{ category_bill.dueDate }}</td>
+                    <td>{{ category_bill.amount }}</td>
+                    <td class="right-align">
+                        <a href="{% url 'bill_detail' category_bill.id %}" class="white waves-effect waves-light btn-small btn-floating z-depth-0"><i class="tiny material-icons left black-text">keyboard_arrow_right</i>Bill Details</a>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No other bills of this category</p>
+        {% endif %}
+        <a href="{% url 'bills' %}"" class=" waves-effect waves-light btn z-depth-0">View All Bills</a>
+    </div>
+</div>
+
 {% endblock %}
