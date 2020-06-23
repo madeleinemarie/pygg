@@ -1,45 +1,59 @@
 {% extends 'base.html' %}
 {% load date_extras %}
 {% block content %}
-<h3>All Bills</h3>
-<a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Sort By</a>
-<ul id='dropdown1' class='dropdown-content'>
-    <li><a href="{% url 'bills' %}?ordering=name">Name</a></li>
-    <li><a href="{% url 'bills' %}?ordering=-amount">Amount (Desc.)</a></li>
-    <li><a href="{% url 'bills' %}?ordering=amount">Amount (Asc.)</a></li>
-    <li><a href="{% url 'bills' %}?ordering=category">Category</a></li>
-</ul>
-<table class="striped">
-    <thead>
-        <tr>
-          <th>Category</th>
-          <th>Name</th>
-          <th>Due Date</th>
-      </tr>
-    </thead>
 
-    <tbody>
-    {% for bill in object_list %}
-      <tr>
-        <td>{{ bill.get_category_display }}</td>
-        <td><a href="{% url 'bill_detail' bill.id %}">{{ bill.name }}</a></td>
-        <td>{{ bill.dueDate|daysuntil }}</td>
-        <td class="right-align"> 
-            <a href="{% url 'bills_update' bill.id %}" class="waves-effect waves-light btn-small btn-floating"><i class="tiny material-icons left">create</i>Edit</a>
-            <a href="{% url 'bills_delete' bill.id %}" class="waves-effect waves-light btn-small btn-floating"><i class="tiny material-icons left">delete</i>Delete</a></td>
-      </tr>
-    {% empty %}
-    <tr>
-        <td>No bills yet.</td>
-    </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-<a href="{% url 'bills_create' %}" class="waves-effect waves-light btn">Add Bill</a>
+<div class="row valign-wrapper">
+    <div class="col s6">
+        <h3>All Bills</h3>
+    </div>
+    <div class="col s6">
+        <a class='dropdown-trigger btn right' href='#' data-target='dropdown1'>Sort By</a>
+        <ul id='dropdown1' class='dropdown-content'>
+            <li><a href="{% url 'bills' %}?ordering=name">Name</a></li>
+            <li><a href="{% url 'bills' %}?ordering=-amount">Amount<i class="tiny material-icons">keyboard_arrow_down</i></a></li>
+            <li><a href="{% url 'bills' %}?ordering=amount">Amount<i class="tiny material-icons">keyboard_arrow_up</i></a></li>
+            <li><a href="{% url 'bills' %}?ordering=category">Category</a></li>
+            <li><a href="{% url 'bills' %}?ordering=-dueDate">Due Date<i class="tiny material-icons">keyboard_arrow_down</i></a></li>
+            <li><a href="{% url 'bills' %}?ordering=dueDate">Due Date<i class="tiny material-icons">keyboard_arrow_up</i></a></li>
+        </ul>
+    </div>
+</div>
+<div>
+    {% if object_list.count %}
+    <table class="striped bill-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Due Date</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bill in object_list %}
+            <tr class="bill-row">
+                <td id="category-color" data-category="{{ bill.get_category_display }}"></td>
+                <td>{{ bill.name }}</td>
+                <td>{{ bill.dueDate|daysuntil }}</td>
+                <td>{{ bill.amount }}</td>
+                <td class="right-align">
+                    <a href="{% url 'bill_detail' bill.id %}" class="waves-effect waves-light btn-small btn-floating"><i class="tiny material-icons left">chevron_right</i>Details</a>
+                    <a href="{% url 'bills_update' bill.id %}" class="waves-effect waves-light btn-small btn-floating"><i class="tiny material-icons left">create</i>Edit</a>
+                    <a href="{% url 'bills_delete' bill.id %}" class="waves-effect waves-light btn-small btn-floating red"><i class="tiny material-icons left">delete</i>Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'bills' %}"" class=" waves-effect waves-light btn">View All Bills</a>
+    {% else %}
+    <p>No bills yet.</p>
+    <a href="{% url 'bills_create' %}" class="waves-effect waves-light btn">Add Bill</a>
+    {% endif %}
+</div>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('.dropdown-trigger');
         var instances = M.Dropdown.init(elems);
-      });
+    });
 </script>
 {% endblock %}
