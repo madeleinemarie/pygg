@@ -47,7 +47,7 @@ def home(request):
     return render(request, 'home.html')
 
 def categoryList(request):
-    bills = Bill.objects.filter(user=self.request.user)
+    bills = Bill.objects.filter(user=request.user)
     categories_total = {}
     for x in CATEGORIES:
         c = bills.filter(category=x[0])
