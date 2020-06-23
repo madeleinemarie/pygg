@@ -73,6 +73,7 @@ def dashboard(request):
         'bills': bills,
         'total_bills': bills.aggregate(Sum('amount')),
         'categories_total': categories_total,
+        'category_colors' : CATEGORIES,
     }
     return render(request, 'dashboard.html', context)
 
