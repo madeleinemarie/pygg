@@ -2,7 +2,7 @@
 {% block content %}
 <div class="row">
     <div class="col s12 l6">
-        chart here
+        <canvas id="myChart" width="400" height="400"></canvas>
         <p>Total Budget: {{ user.userinfo.budget }}</p>
         <p>Total Amount: {{ total_bills.amount__sum }}</p>
 
@@ -65,4 +65,60 @@
         </div>
 </div>
 
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let balance = {{ user.userinfo.budget }} - {{ total_bills.amount__sum }};
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        innerRadius: 25,
+        data: {
+            labels: [{% for key,val in categories_total.items|slice:":5" %}'{{ key }}',{% endfor %} 'Remaining Money'],
+            datasets: [{
+                label: 'label',
+                data: [{% for key,val in categories_total.items|slice:":5" %}'{{ val }}',{% endfor %} balance],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(200, 200, 200, 1)'
+                ],
+                borderWidth: 0
+            }],
+        },
+
+
+
+        options: {
+            legend: {
+                position: 'bottom',
+            },
+            cutoutPercentage: 30,
+            title: {
+                display: false,
+                text: "Bills by Category",
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {display: false},
+                    gridLines: {
+                        display: false,
+                        drawBorder: false,
+                    }
+                }],
+                yAxes: [{
+                    ticks: {display: false},
+                    gridLines: {
+                        display: false,
+                        drawBorder: false,
+                    }
+                }]
+            }
+        }
+    });
+});
+</script>
 {% endblock %}
