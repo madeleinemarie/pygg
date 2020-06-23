@@ -1,3 +1,7 @@
+main {
+    margin-top: 40px;
+}
+
 #user-panel {
     min-height: 13rem;
 }
@@ -9,8 +13,18 @@
     background-size: 85%;
 }
 
-.test {
-    border: 1px solid red;
+td#category-color {
+    width: 5px;
+    background-color: lightsalmon;
+    padding: 0;
+}
+
+.card-header {
+    padding: 10px 24px;
+}
+
+h2.details-amount {
+    margin: 0 0 15px 0 !important;
 }
 
 @media (max-width:992px) {

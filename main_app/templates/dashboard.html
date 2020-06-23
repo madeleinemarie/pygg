@@ -10,9 +10,10 @@
     <div class="col s12 l6">
         <div>
             <h4>Upcoming Bills</h4>
-            <table class="striped">
+            <table class="striped bill-table">
                 <thead>
                   <tr>
+                      <th></th>
                       <th>Category</th>
                       <th>Name</th>
                       <th>Due Date</th>
@@ -22,7 +23,7 @@
                 <tbody>
                 {% for bill in bills|slice:":5"%}
                   <tr>
-                    <td>{{ bill.get_category_display }}</td>
+                    <td id="category-color" data-category="{{ bill.get_category_display }}"></td>
                     <td>{{ bill.name }}</td>
                     <td>{{ bill.dueDate }}</td>
                     <td>{{ bill.amount }}</td>
@@ -50,7 +51,7 @@
                 </thead>
                 <tbody>
                 {% for key,val in categories_total.items|slice:":5"%}
-                  <tr>
+                  <tr id="category-row">
                     <td>{{ key }}</td>
                     <td class="right-align" >{{ val }}</td>
                   </tr>
@@ -61,10 +62,9 @@
                 {% endfor %}
                 </tbody>
               </table>
-            <a href="{% url 'categories' %}"" class=" waves-effect waves-light btn">View All Categories</a>
+            <a href="{% url 'categories' %}" class="waves-effect waves-light btn">View All Categories</a>
         </div>
 </div>
-
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -79,19 +79,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 label: 'label',
                 data: [{% for key,val in categories_total.items|slice:":5" %}'{{ val }}',{% endfor %} balance],
                 backgroundColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(200, 200, 200, 1)'
+                    'lightsalmon',
+                    'hotpink',
+                    'orangered',
+                    'darkkhaki',
+                    'mediumpurple',
+                    'mediumaquamarine',
+                    'steelblue',
+                    'gainsboro'
                 ],
                 borderWidth: 0
             }],
         },
-
-
-
         options: {
             legend: {
                 position: 'bottom',
