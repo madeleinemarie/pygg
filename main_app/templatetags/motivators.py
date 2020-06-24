@@ -6,13 +6,14 @@ register = template.Library()
 
 @register.filter(name='subtract')
 def subtract(value, arg):
-    balance = value - arg
-    if balance == 0:
-        return f"You're exactly on budget. What a coincidence!"
-    elif balance < 0:
-        return f"You're ${abs(balance)} over your monthly budget. Time to tighten up the belt."
-    else:
-        return f"You're ${balance} under your budget. Go ahead and treat yo' self!"
+    if arg:
+        balance = value - arg
+        if balance == 0:
+            return f"You're exactly on budget. What a coincidence!"
+        elif balance < 0:
+            return f"You're ${abs(balance)} over your monthly budget. Time to tighten up the belt."
+        else:
+            return f"You're ${balance} under your budget. Go ahead and treat yo' self!"
     
 @register.simple_tag(name='protip')
 def random_protip():
