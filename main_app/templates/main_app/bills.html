@@ -7,8 +7,11 @@
         <h3>All Bills</h3>
     </div>
     <div class="col s6">
-        <a class='dropdown-trigger btn right' href='#' data-target='dropdown1'>Sort By</a>
-        <ul id='dropdown1' class='dropdown-content'>
+        <div class="action-panel right-align">
+            <a class='dropdown-trigger btn-floating btn-medium grey tooltipped' data-position="bottom" data-tooltip="Sort" href='#' data-target='dropdown1'> <i class="tiny material-icons">sort_by_alpha</i></a>
+            <a href="{% url 'bills_create' %}" class="btn-floating btn-medium red tooltipped" data-position="bottom" data-beloworigin="true" data-tooltip="Add New Bill"><i class="tiny material-icons">add</i></a>
+        </div>
+        <ul id='dropdown1' class='dropdown-content' >
             <li><a href="{% url 'bills' %}?ordering=name">Name</a></li>
             <li><a href="{% url 'bills' %}?ordering=-amount">Amount<i class="tiny material-icons">keyboard_arrow_down</i></a></li>
             <li><a href="{% url 'bills' %}?ordering=amount">Amount<i class="tiny material-icons">keyboard_arrow_up</i></a></li>
@@ -21,34 +24,27 @@
 <div>
     {% if object_list.count %}
     <table class="striped bill-table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Due Date</th>
-                <th>Amount</th>
-            </tr>
-        </thead>
         <tbody>
             {% for bill in object_list %}
             <tr class="bill-row">
                 <td id="category-color" data-category="{{ bill.get_category_display }}"></td>
-                <td>{{ bill.name }}</td>
-                <td>{{ bill.dueDate|daysuntil }}</td>
-                <td>{{ bill.amount }}</td>
-                <td class="right-align">
-                    <a href="{% url 'bill_detail' bill.id %}" class="waves-effect waves-light btn-small btn-floating"><i class="tiny material-icons left">chevron_right</i>Details</a>
-                    <a href="{% url 'bills_update' bill.id %}" class="waves-effect waves-light btn-small btn-floating"><i class="tiny material-icons left">create</i>Edit</a>
-                    <a href="{% url 'bills_delete' bill.id %}" class="waves-effect waves-light btn-small btn-floating red"><i class="tiny material-icons left">delete</i>Delete</a></td>
+                <td class="center-align"><h6>{{ bill.dueDate|daysuntil }}</h6></td>
+                <td class="left-align"><h4>{{ bill.name }}&nbsp;&nbsp;{{ bill.dueDate|daysbadge }}</h4>
+                    <p>{{ bill.description }}</p>
+                </td>
+                <td class="right-align"><h4>${{ bill.amount }}</h4></td>
+                <td class="center-align">
+                    <a href="{% url 'bill_detail' bill.id %}" class="btn-small btn-floating tooltipped grey lighten-3 btn-flat" data-position="bottom" data-tooltip="{{ bill.name }} Details"><i class="tiny material-icons black-text">chevron_right</i>Details</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <a href="{% url 'bills' %}"" class=" waves-effect waves-light btn">View All Bills</a>
     {% else %}
     <p>No bills yet.</p>
     <a href="{% url 'bills_create' %}" class="waves-effect waves-light btn">Add Bill</a>
     {% endif %}
+
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {

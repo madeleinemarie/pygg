@@ -66,6 +66,7 @@ TEMPLATES = [
             ],
             'libraries':{
                 'date_extras': 'main_app.templatetags.date_extras',
+                'motivators': 'main_app.templatetags.motivators',
             }
         },
     },

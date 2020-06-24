@@ -1,9 +1,42 @@
-main {
+* {
+    font-family: 'Quicksand', sans-serif;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
     margin-top: 40px;
+    flex: 1 0 auto;
+  }
+
+
+h1, h2, h3, h4 {
+    font-weight: 700 !important;
+}
+
+
+tr.bill-row td:nth-child(2) {
+    width: 175px !important;
+}
+
+tr.bill-row td:last-child {
+    width: 75px !important;
 }
 
 #user-panel {
     min-height: 13rem;
+}
+
+.dashboard-table {
+    margin-top: 40px;
+}
+
+.footer-logo {
+    width: 300px;
 }
 
 .logo {
@@ -13,8 +46,14 @@ main {
     background-size: 85%;
 }
 
+.badge {
+    border-radius: 10px !important;
+    transform: translateY(-6px);
+    padding: 0 15px !important;
+}
+
 td#category-color {
-    width: 5px;
+    width: 8px;
     background-color: lightsalmon;
     padding: 0;
 }
