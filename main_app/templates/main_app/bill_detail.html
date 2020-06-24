@@ -44,7 +44,7 @@
                     <td id="category-color" data-category="{{ object.get_category_display }}"></td>
                     <td>{{ category_bill.name }}</td>
                     <td class="right-align">{{ category_bill.amount }}</td>
-                    <td class="right-align">
+                    <td class="center-align">
                         <a href="{% url 'bill_detail' category_bill.id %}" class="btn-small btn-floating tooltipped grey lighten-3 btn-flat" data-position="bottom" data-tooltip="{{ category_bill.name }} Details"><i class="tiny material-icons black-text">chevron_right</i>Details</a>
 
                     </tr>

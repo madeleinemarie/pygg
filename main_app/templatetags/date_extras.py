@@ -5,34 +5,6 @@ from django.utils.safestring import mark_safe
 
 register = template.Library()
 
-
-# @register.filter(name='daysbadge', expects_localtime=True)
-# def days_until(target_date):
-#     today = datetime.date.today()
-#     if isinstance(target_date, datetime.date):
-#         delta = target_date - today
-#     else:
-#         delta = target_date.date() - today
-#     if delta.days == -1:
-#         text = f"<small>DUE</small><br><h5>{abs(delta.days)} Day Ago</5><br><span class=\"badge red white-text\">Past Due</span>"
-#         return mark_safe(text)
-#     elif delta.days < 0:
-#         text = f"<small>DUE</small><br>{abs(delta.days)} Days Ago<br><span class=\"badge red white-text\">Past Due</span>"
-#         return mark_safe(text)
-#     elif delta.days == 1:
-#         text = f"<span class=\"badge orange white-text\">Due Tomorrow</span>"
-#         return mark_safe(text)
-#     elif delta.days == 0:
-#         text = f"<span class=\"badge orange white-text\">Due Today</span>"
-#         return mark_safe(text)
-#     elif delta.days <= 7:
-#         text = f"<small>DUE IN</small><br>{delta.days} Days<br><span class=\"badge yellow black-text\">Due Soon</span>"
-#         return mark_safe(text)
-#     else:
-#         text = f"<small>DUE IN</small><br>{delta.days} Days"
-#         return mark_safe(text)
-
-
 @register.filter(name='daysbadge', expects_localtime=True)
 def days_until(target_date):
     today = datetime.date.today()
