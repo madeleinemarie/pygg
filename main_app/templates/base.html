@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load motivators %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,11 +45,11 @@
                 </div>
             </div>
         </nav>
-        <div class="pink lighten-4" id="user-panel">
+        <div class="pink lighten-4 valign-wrapper" id="user-panel">
             <div class="container row">
                 <div class="col s12 l9">
                     <h3>Welcome, {{ user }}!</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p><b>PROTIP:</b> {% protip %}</p>
                 </div>
                 <div class="col s12 l3 right-align" id="user-panel-budget">
                     <p>Your monthly budget is:</p>
