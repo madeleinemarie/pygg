@@ -33,7 +33,8 @@ class Bill(models.Model):
         choices=CATEGORIES,
         default=CATEGORIES[0][0]
     )
-
+    paid = models.BooleanField(default=False)
+    
     # def __str__(self):
     #     return self.name
 
