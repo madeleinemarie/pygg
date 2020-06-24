@@ -9,15 +9,22 @@ body {
   }
 
   main {
-    margin-top: 40px;
     flex: 1 0 auto;
   }
 
+.main-content {
+    margin-top: 40px;
+}
 
 h1, h2, h3, h4 {
     font-weight: 700 !important;
 }
 
+div.slider {
+    background: url('../images/pg_bg.jpg') no-repeat;
+    background-position: center;
+    background-size: cover;
+}
 
 tr.bill-row td:nth-child(2) {
     width: 175px !important;

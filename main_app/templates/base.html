@@ -68,7 +68,9 @@
         {% endif %}
     </header>
     <main>
-        <div class="container">
+        {% block homecontent %}
+        {% endblock %}
+        <div class="container main-content">
             {% block content %}
             {% endblock %}
         </div>
