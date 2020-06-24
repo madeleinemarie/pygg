@@ -58,8 +58,18 @@ td#category-color {
     padding: 0;
 }
 
+.collapsible-header, .collapsible-body, .collapsible, ul.collapsible>li {
+  box-shadow: none !important;
+}
+
 .card-header {
     padding: 10px 24px;
+}
+
+.cat-row {
+    width: 100% !important;
+    height: 100% !important;
+    margin-bottom: 0 !important;
 }
 
 h2.details-amount {
