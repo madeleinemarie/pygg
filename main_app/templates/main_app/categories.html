@@ -15,7 +15,27 @@
               </div>
           </div>
       </div>
-      <div class="collapsible-body">{{ val }}</div>
+      <div class="collapsible-body">
+          <table class="striped bill-table">
+              <tbody>
+        {% for bill in bills %}
+            {% if bill.get_category_display == key %}
+                    <tr class="bill-row">
+                        <td></td>
+                        <td class="center-align"><small>Due On</small><br><h6>{{ bill.dueDate }}</h6></td>
+                        <td class="left-align"><h4>{{ bill.name }}</h4>
+                            <p>{{ bill.description }}</p>
+                        </td>
+                        <td class="right-align"><h4>${{ bill.amount }}</h4></td>
+                        <td class="center-align">
+                            <a href="{% url 'bill_detail' bill.id %}" class="btn-small btn-floating tooltipped grey lighten-3 btn-flat" data-position="bottom" data-tooltip="{{ bill.name }} Details"><i class="tiny material-icons black-text">chevron_right</i>Details</a>
+                        </td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+      </div>
     </li>
     {% empty %}
     <p>No bills yet.</p>
