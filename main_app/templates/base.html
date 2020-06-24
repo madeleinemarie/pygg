@@ -47,14 +47,14 @@
         </nav>
         <div class="pink lighten-4 valign-wrapper" id="user-panel">
             <div class="container row">
-                <div class="col s12 l9">
+                <div class="col s12 l8">
                     <h3>Welcome, {{ user }}!</h3>
                     <p><b>PROTIP:</b> {% protip %}</p>
                 </div>
-                <div class="col s12 l3 right-align" id="user-panel-budget">
-                    <p>Your monthly budget is:</p>
-                    <h2 class="details-amount">${{ user.userinfo.budget }}</h2>
-                    <a href="{% url 'budget_update' %}">Update Budget</a>
+                <div class="col s12 l4 right-align" id="user-panel-budget">
+                    <p>Your Monthly budget:</p>
+                    <h2 class="details-amount">${{ user.userinfo.budget }}<a href="{% url 'budget_update' %}" class="btn-medium btn-flat btn-floating right-align tooltipped" data-position="bottom" data-tooltip="Edit your budget"><i class="material-icons black-text">edit</i></a></h2>
+                    
                 </div>
             </div>
         </div>
@@ -80,10 +80,10 @@
                     <a href={% url 'home' %}><img class="footer-logo" src="{% static 'images/pygg_logo-h.svg' %}" alt="PYGG"></a>
                     <p class="black-text hide-on-med-and-up">GA • SEI • Project 3<br> Build a Full-stack Django App as a Team</p>
                 </div>
-                <div class="col l4 s12 hide-on-small-only">
+                <div class="col l4 offset-l2 offset-m1 s12 hide-on-small-only">
                     <p class="black-text">GA • SEI • Project 3<br> Build a Full-stack Django App as a Team</p>
                 </div>
-                <div class="col l4 s12 right-align">
+                <div class="col l3 offset-l2 s12 right-align">
                     <ul>
                         <li><a class="black-text" href="https://github.com/madeleinemarie/pygg">GitHub</a></li>
                         <li><a class="black-text" href="https://github.com/madeleinemarie">Maddy</a></li>
