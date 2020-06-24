@@ -15,9 +15,9 @@ class BillList(ListView):
     def get_queryset(self):
         order_req = self.request.GET.get('ordering')
         if order_req:
-            return Bill.objects.filter(user=self.request.user).order_by(order_req)
+            return Bill.objects.filter(user=self.request.user, paid=False).order_by(order_req)
         else:
-            return Bill.objects.filter(user=self.request.user).order_by('dueDate')
+            return Bill.objects.filter(user=self.request.user, paid=False).order_by('dueDate')
 
 class BillDetail(DetailView):
     model = Bill
@@ -76,6 +76,16 @@ def dashboard(request):
         'category_colors' : CATEGORIES,
     }
     return render(request, 'dashboard.html', context)
+
+def mark_paid(request, pk):
+    bill = Bill.objects.get(id=pk)
+    bill.paid = True
+    bill.save()
+    return redirect('/bills/')
+
+def paid_list(request):
+    paid_bills = Bill.objects.filter(user=request.user, paid=True)
+    return render(request, 'main_app/paid.html', { 'paid_bills' : paid_bills })
 
 def budget_update(request):
     user_info = UserInfo.objects.get(user=request.user)
