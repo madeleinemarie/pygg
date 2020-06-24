@@ -23,8 +23,8 @@
                     {% for bill in bills|slice:":5"%}
                     <tr class="bill-row">
                         <td id="category-color" data-category="{{ bill.get_category_display }}"></td>
-                        <td>{{ bill.name }}</td>
                         <td>{{ bill.dueDate }}</td>
+                        <td>{{ bill.name }}</td>
                         <td>{{ bill.amount }}</td>
                         <td class="right-align">
                             <a href="{% url 'bills_update' bill.id %}" class="waves-effect waves-light btn-small btn-floating"><i class="tiny material-icons left">create</i>Edit</a>

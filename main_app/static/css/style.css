@@ -1,5 +1,25 @@
+* {
+    font-family: 'Quicksand', sans-serif;
+}
+
+h1, h2, h3, h4 {
+    font-weight: 700 !important;
+}
+
 main {
     margin-top: 40px;
+}
+
+tr {
+    height: 100px !important;
+}
+
+tr.bill-row td:nth-child(2) {
+    width: 175px !important;
+}
+
+tr.bill-row td:last-child {
+    width: 75px !important;
 }
 
 #user-panel {
@@ -13,8 +33,14 @@ main {
     background-size: 85%;
 }
 
+.badge {
+    border-radius: 10px !important;
+    transform: translateY(-6px);
+    padding: 0 15px !important;
+}
+
 td#category-color {
-    width: 5px;
+    width: 8px;
     background-color: lightsalmon;
     padding: 0;
 }
