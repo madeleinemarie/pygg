@@ -1,25 +1,54 @@
 {% extends 'base.html' %}
 {% block content %}
 <h3>Categories</h3>
-<table class="striped">
-    <thead>
-      <tr>
-          <th>Category</th>
-          <th class="right-align">Amount</th>
-      </tr>
-    </thead>
-    <tbody>
+
+<ul class="collapsible expandable">
     {% for key,val in categories_total.items%}
-    <tr id="category-row">
-        <td id="category-name">{{ key }}</td>
-        <td class="right-align" >{{ val }}</td>
-      </tr>
+    <li>
+      <div class="collapsible-header valign-wrapper" id="category-color" data-category="{{ key }}">
+          <div class="row cat-row">
+              <div class="col s6">
+                  <h4 class="white-text">{{ key }}</h4>
+              </div>
+              <div class="col s6 right-align">
+                <h4 class="white-text">${{ val }}</h4>
+              </div>
+          </div>
+      </div>
+      <div class="collapsible-body">
+          <table class="striped bill-table">
+              <tbody>
+        {% for bill in bills %}
+            {% if bill.get_category_display == key %}
+                    <tr class="bill-row">
+                        <td></td>
+                        <td class="center-align"><small>Due On</small><br><h6>{{ bill.dueDate }}</h6></td>
+                        <td class="left-align"><h4>{{ bill.name }}</h4>
+                            <p>{{ bill.description }}</p>
+                        </td>
+                        <td class="right-align"><h4>${{ bill.amount }}</h4></td>
+                        <td class="center-align">
+                            <a href="{% url 'bill_detail' bill.id %}" class="btn-small btn-floating tooltipped grey lighten-3 btn-flat" data-position="bottom" data-tooltip="{{ bill.name }} Details"><i class="tiny material-icons black-text">chevron_right</i>Details</a>
+                        </td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+      </div>
+    </li>
     {% empty %}
-    <tr>
-        <td>No bills yet.</td>
-    </tr>
+    <p>No bills yet.</p>
     {% endfor %}
-    </tbody>
-  </table>
+  </ul>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var csElem = document.querySelectorAll('.collapsible.expandable');
+        M.Collapsible.init(csElem, {
+            accordion: false
+        });
+    });
+</script>
 {% endblock %}
