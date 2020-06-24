@@ -82,6 +82,7 @@ def budget_update(request):
     form = UserInfoForm(request.POST, instance=user_info)
     if form.is_valid():
         form.save()
+        return redirect('/dashboard/')
     return render(request, 'budget.html', { 'form' : form })
 
 def signup(request):

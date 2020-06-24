@@ -59,22 +59,45 @@
             </div>
         </div>
         {% else %}
-            <ul class="right">
-                <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                <li><a href="{% url 'login' %}">Log In</a></li>
-            </ul>
+        <ul class="right">
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            <li><a href="{% url 'login' %}">Log In</a></li>
+        </ul>
         </div>
         </nav>
         {% endif %}
     </header>
     <main>
         <div class="container">
-        {% block content %}
-        {% endblock %}
+            {% block content %}
+            {% endblock %}
         </div>
     </main>
+    <footer class="page-footer pink lighten-4">
+        <div class="container">
+            <div class="row valign-wrapper">
+                <div class="col l4 s12">
+                    <a href={% url 'home' %}><img class="footer-logo" src="{% static 'images/pygg_logo-h.svg' %}" alt="PYGG"></a>
+                    <p class="black-text hide-on-med-and-up">GA • SEI • Project 3<br> Build a Full-stack Django App as a Team</p>
+                </div>
+                <div class="col l4 s12 hide-on-small-only">
+                    <p class="black-text">GA • SEI • Project 3<br> Build a Full-stack Django App as a Team</p>
+                </div>
+                <div class="col l4 s12 right-align">
+                    <ul>
+                        <li><a class="black-text" href="https://github.com/madeleinemarie/pygg">GitHub</a></li>
+                        <li><a class="black-text" href="https://github.com/madeleinemarie">Maddy</a></li>
+                        <li><a class="black-text" href="https://github.com/audarbe">Alex</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright grey darken-3">
+        </div>
+        </div>
+    </footer>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             let sidenav = document.getElementById('sidenav');
             M.Sidenav.init(sidenav)
 
@@ -83,4 +106,5 @@
         });
     </script>
 </body>
+
 </html>
