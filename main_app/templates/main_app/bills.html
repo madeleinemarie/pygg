@@ -7,8 +7,10 @@
         <h3>All Bills</h3>
     </div>
     <div class="col s6">
-        <a href="{% url 'bills_create' %}" class="btn-floating btn-medium red right tooltipped" data-position="bottom" data-beloworigin="true" data-tooltip="Add New Bill"><i class="tiny material-icons">add</i> </a>
-        <a class='dropdown-trigger btn-floating btn-medium grey right tooltipped' data-position="bottom" data-tooltip="Sort" href='#' data-target='dropdown1'> <i class="tiny material-icons">sort_by_alpha</i></a>
+        <div class="action-panel right-align">
+            <a class='dropdown-trigger btn-floating btn-medium grey tooltipped' data-position="bottom" data-tooltip="Sort" href='#' data-target='dropdown1'> <i class="tiny material-icons">sort_by_alpha</i></a>
+            <a href="{% url 'bills_create' %}" class="btn-floating btn-medium red tooltipped" data-position="bottom" data-beloworigin="true" data-tooltip="Add New Bill"><i class="tiny material-icons">add</i></a>
+        </div>
         <ul id='dropdown1' class='dropdown-content' >
             <li><a href="{% url 'bills' %}?ordering=name">Name</a></li>
             <li><a href="{% url 'bills' %}?ordering=-amount">Amount<i class="tiny material-icons">keyboard_arrow_down</i></a></li>
@@ -48,9 +50,6 @@
     document.addEventListener('DOMContentLoaded', function () {
         var elems = document.querySelectorAll('.dropdown-trigger');
         var instances = M.Dropdown.init(elems);
-
-        var ttElems = document.querySelectorAll('.tooltipped');
-        var ttInstances = M.Tooltip.init(ttElems);
     });
 </script>
 {% endblock %}

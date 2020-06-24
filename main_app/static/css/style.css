@@ -10,10 +10,6 @@ main {
     margin-top: 40px;
 }
 
-tr {
-    height: 100px !important;
-}
-
 tr.bill-row td:nth-child(2) {
     width: 175px !important;
 }
