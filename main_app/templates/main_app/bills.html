@@ -30,7 +30,7 @@
                 <td id="category-color" data-category="{{ bill.get_category_display }}"></td>
                 <td class="center-align"><h6>{{ bill.dueDate|daysuntil }}</h6></td>
                 <td class="left-align"><h4>{{ bill.name }}&nbsp;&nbsp;{{ bill.dueDate|daysbadge }}</h4>
-                    <p>{{ bill.description }}</p>
+                    <p>{{ bill.description }}<a href="{% url 'mark_paid' bill.id %}">Mark as Paid</a></p>
                 </td>
                 <td class="right-align"><h4>${{ bill.amount }}</h4></td>
                 <td class="center-align">
@@ -44,7 +44,7 @@
     <p>No bills yet.</p>
     <a href="{% url 'bills_create' %}" class="waves-effect waves-light btn">Add Bill</a>
     {% endif %}
-
+    <a href="{% url 'paid_list' %}">See Paid Bills</a>
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
