@@ -19,8 +19,14 @@ class UserInfo(models.Model):
 class Bill(models.Model):
     name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    description = models.TextField(max_length=250)
-    amount = models.IntegerField()
+    description = models.TextField(
+        max_length=250,
+        blank=True
+    )
+    amount = models.DecimalField(
+        max_digits=9,
+        decimal_places=2
+    )
     dueDate = models.DateField('Due Date')
     category = models.CharField(
         max_length=2,
