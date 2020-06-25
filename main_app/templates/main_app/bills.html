@@ -9,8 +9,10 @@
     </div>
     <div class="col s6">
         <div class="action-panel right-align">
+            {% if object_list.count %}
             <a class='dropdown-trigger btn-floating btn-medium grey tooltipped' data-position="bottom" data-tooltip="Sort" href='#' data-target='dropdown1'> <i class="tiny material-icons">sort_by_alpha</i></a>
             <a href="{% url 'paid_list' %}" class="btn-floating btn-medium green tooltipped" data-position="bottom" data-beloworigin="true" data-tooltip="View Paid Bills"><i class="tiny material-icons">attach_money</i></a>
+            {% endif %}
             <a href="{% url 'bills_create' %}" class="btn-floating btn-medium red tooltipped" data-position="bottom" data-beloworigin="true" data-tooltip="Add New Bill"><i class="tiny material-icons">add</i></a>
         </div>
         <ul id='dropdown1' class='dropdown-content'>
@@ -44,7 +46,7 @@
         </tbody>
     </table>
     {% else %}
-    <p>No bills yet.</p>
+    <p>No bills yet. Add a bill to get started!</p>
     <a href="{% url 'bills_create' %}" class="waves-effect waves-light btn-large pink lighten-3">Add Bill</a>
     {% endif %}
 </div>
