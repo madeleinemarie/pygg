@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load humanize %}
 {% block content %}
 <div class="row">
     <div class="col s12 l6">
@@ -8,7 +9,7 @@
                 <a href="{% url 'bills_update' bill.id %}" class="btn-floating halfway-fab waves-effect waves-light red tooltipped" data-position="bottom" data-tooltip="Edit {{ bill.name }}"><i class=" tiny material-icons left">create</i>Edit</a>
             </div>
             <div class="card-content">
-                <h2 class="details-amount">${{ bill.amount }}</h2>
+                <h2 class="details-amount">${{ bill.amount|intcomma }}</h2>
                 <p>{{ bill.description }}</p>
                 <h3><small>Due:</small><br> {{ bill.dueDate }}</3p>
             </div>
@@ -43,7 +44,7 @@
                 <tr>
                     <td id="category-color" data-category="{{ object.get_category_display }}"></td>
                     <td>{{ category_bill.name }}</td>
-                    <td class="right-align">{{ category_bill.amount }}</td>
+                    <td class="right-align">{{ category_bill.amount|intcomma }}</td>
                     <td class="center-align">
                         <a href="{% url 'bill_detail' category_bill.id %}" class="btn-small btn-floating tooltipped grey lighten-3 btn-flat" data-position="bottom" data-tooltip="{{ category_bill.name }} Details"><i class="tiny material-icons black-text">chevron_right</i>Details</a>
 

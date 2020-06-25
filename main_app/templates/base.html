@@ -1,5 +1,6 @@
 {% load static %}
 {% load motivators %}
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,7 +54,7 @@
                 </div>
                 <div class="col s12 l4 right-align" id="user-panel-budget">
                     <p>Your Monthly budget:</p>
-                    <h2 class="details-amount">${{ user.userinfo.budget }}<a href="{% url 'budget_update' %}" class="btn-medium btn-flat btn-floating right-align tooltipped" data-position="bottom" data-tooltip="Edit your budget"><i class="material-icons black-text">edit</i></a></h2>
+                    <h2 class="details-amount">${{ user.userinfo.budget|intcomma }}<a href="{% url 'budget_update' %}" class="btn-medium btn-flat btn-floating right-align tooltipped" data-position="bottom" data-tooltip="Edit your budget"><i class="material-icons black-text">edit</i></a></h2>
 
                 </div>
             </div>
