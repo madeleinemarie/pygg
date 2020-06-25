@@ -6,3 +6,6 @@ class UserInfoForm(forms.ModelForm):
     class Meta:
         model = UserInfo
         fields = ['budget']
+        help_texts = {
+            'budget': 'Enter your monthly budget.',
+        }
