@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load date_extras %}
+{% load humanize %}
 {% block content %}
 
 <div class="row valign-wrapper">
@@ -31,7 +32,7 @@
                 <td class="left-align"><h4>{{ bill.name }}</h4>
                     <p>{{ bill.description }}</p>
                 </td>
-                <td class="right-align"><h4>${{ bill.amount }}&nbsp;</h4></td>
+                <td class="right-align"><h4>${{ bill.amount|intcomma }}&nbsp;</h4></td>
             </tr>
             {% endfor %}
         </tbody>

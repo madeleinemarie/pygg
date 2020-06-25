@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load humanize %}
 {% load date_extras %}
 {% block content %}
 
@@ -33,7 +34,7 @@
                 <td class="left-align"><h4>{{ bill.name }}&nbsp;&nbsp;{{ bill.dueDate|daysbadge }}</h4>
                     <p>{{ bill.description }}</p>
                 </td>
-                <td class="right-align"><h4>${{ bill.amount }}</h4></td>
+                <td class="right-align"><h4>${{ bill.amount|intcomma }}</h4></td>
                 <td class="center-align">
                     <a href="{% url 'mark_paid' bill.id %}" class="btn-small btn-floating tooltipped green btn-flat" data-position="bottom" data-tooltip="Mark {{ bill.name }} as paid"><i class="tiny material-icons white-text">attach_money</i>Details</a>
                     <a href="{% url 'bill_detail' bill.id %}" class="btn-small btn-floating tooltipped grey lighten-3 btn-flat" data-position="bottom" data-tooltip="{{ bill.name }} Details"><i class="tiny material-icons black-text">chevron_right</i>Details</a>
