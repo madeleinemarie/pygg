@@ -68,7 +68,7 @@ def categoryList(request):
     return render(request, 'main_app/categories.html', context)
 
 @login_required
-def dashboard(request):
+def dashboard(request): 
     bills = Bill.objects.filter(user=request.user, paid=False).order_by('dueDate')
     categories_total = {}
     for x in CATEGORIES:
