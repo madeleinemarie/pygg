@@ -1,13 +1,20 @@
 {% extends 'base.html' %}
 {% load motivators %}
+{% load humanize %}
 {% block content %}
 <div class="row">
     <div class="col s12 l6">
         <div class="left-align">
+            {% if bills.count %}
             <h2>{{ user.userinfo.budget|subtract:total_bills.amount__sum }}</h2>
+            {% endif %}
         </div>
         <div class="dashboard-table">
+            {% if bills.count %}
             <canvas id="myChart" width="400" height="400"></canvas>
+            {% else %}
+            <h2><a href="{% url 'bills_create' %}">Add a bill to get started!</a></h2>
+            {% endif %}
         </div>
     </div>
     <div class="col s12 l6">
@@ -39,7 +46,7 @@
                         <td id="category-color" data-category="{{ bill.get_category_display }}"></td>
                         <td>{{ bill.dueDate }}</td>
                         <td>{{ bill.name }}</td>
-                        <td class="right-align">{{ bill.amount }}</td>
+                        <td class="right-align">${{ bill.amount|intcomma }}</td>
                         <td class="right-align">
                             <a href="{% url 'bill_detail' bill.id %}" class="btn-small btn-floating tooltipped grey lighten-3 btn-flat" data-position="bottom" data-tooltip="{{ bill.name }} Details"><i class="tiny material-icons black-text">chevron_right</i>Details</a>
                     </tr>
@@ -73,7 +80,7 @@
                     {% for key,val in categories_total.items|slice:":5"%}
                     <tr id="category-row">
                         <td id="category-name" class="white-text">{{ key }}</td>
-                        <td class="right-align white-text">{{ val }}</td>
+                        <td class="right-align white-text">${{ val|intcomma }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
