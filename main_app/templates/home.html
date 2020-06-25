@@ -53,17 +53,17 @@
                 <div class="col s12 l4">
                     <i class="material-icons medium">note_add</i>
                     <h4>Enter your monthly budget and bills</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos quas nulla reprehenderit, deleniti rem neque?</p>
+                    <p>Sign up for an account and enter your monthly budget. From there, go ahead and start entering your bills.</p>
                 </div>
                 <div class="col s12 l4">
                     <i class="material-icons medium">devices</i>
                     <h4>Monitor your balances and adjust spending</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos quas nulla reprehenderit, deleniti rem neque?</p>
+                    <p>Use Pygg's features to keep a close eye on how much you're spending per month on bills and adjust your budget accordingly.</p>
                 </div>
                 <div class="col s12 l4">
                     <i class="material-icons medium">sentiment_very_satisfied</i>
                     <h4>Treat yourself!<br>(or tighten your belt)</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos quas nulla reprehenderit, deleniti rem neque?</p>
+                    <p>We hope you have a positive balance to treat yourself to something nice. If you're over-budget, it's time to cut back!</p>
                 </div>
             </div>
         </ul>
@@ -91,7 +91,7 @@
             </div>
             <div class="col s12 pull-l6 l6 feat">
                 <h2>View all your bills</h2>
-                <p>We bring together all of your accounts, bills and more, so you can conveniently manage your finances from one dashboard.</p>
+                <p>Get a breakdown of all your monthly bills and sort them however you want. Pygg offers badges and color-coding to keep you organized.</p>
                 {% if user.is_authenticated %}
                 <a href=" {% url 'bills' %}" class="btn-small pink lighten-3 z-depth-0">View Bills</a>
                 {% else %}
@@ -106,7 +106,7 @@
             </div>
             <div class="col s12 l6 feat">
                 <h2>View your bill categories</h2>
-                <p>We bring together all of your accounts, bills and more, so you can conveniently manage your finances from one dashboard.</p>
+                <p>View all your monthly bills by category. If you notice that you're spending a lot more in particular category, find ways to balance your subscriptions and payments.</p>
                 {% if user.is_authenticated %}
                 <a href="{% url 'categories' %}" class="btn-small pink lighten-3 z-depth-0">View Categories</a>
                 {% else %}
