@@ -7,7 +7,7 @@
             <h2>{{ user.userinfo.budget|subtract:total_bills.amount__sum }}</h2>
         </div>
         <div class="dashboard-table">
-        <canvas id="myChart" width="400" height="400"></canvas>
+            <canvas id="myChart" width="400" height="400"></canvas>
         </div>
     </div>
     <div class="col s12 l6">
@@ -42,7 +42,7 @@
                         <td class="right-align">{{ bill.amount }}</td>
                         <td class="right-align">
                             <a href="{% url 'bill_detail' bill.id %}" class="btn-small btn-floating tooltipped grey lighten-3 btn-flat" data-position="bottom" data-tooltip="{{ bill.name }} Details"><i class="tiny material-icons black-text">chevron_right</i>Details</a>
-                        </tr>
+                    </tr>
                     {% endfor %}
                 </tbody>
             </table>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="col s3">
                     <div class="action-panel right-align">
-                        <a href="{% url 'categories' %}" class="btn-floating btn-small blue tooltipped" data-position="bottom" data-beloworigin="true" data-tooltip="View All Bills"><i class="tiny material-icons">view_headline</i></a>
+                        <a href="{% url 'categories' %}" class="btn-floating btn-small blue tooltipped" data-position="bottom" data-beloworigin="true" data-tooltip="View By Category"><i class="tiny material-icons">view_headline</i></a>
                     </div>
                 </div>
             </div>
@@ -72,8 +72,8 @@
                 <tbody>
                     {% for key,val in categories_total.items|slice:":5"%}
                     <tr id="category-row">
-                        <td id="category-name">{{ key }}</td>
-                        <td class="right-align">{{ val }}</td>
+                        <td id="category-name" class="white-text">{{ key }}</td>
+                        <td class="right-align white-text">{{ val }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -116,10 +116,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         return data['labels'][tooltipItems['index']] + ' $' + data['datasets'][0]['data'][tooltipItems['index']];
                     }
                 },
-                backgroundColor: '#FFF',
-                bodyFontColor: '#000',
-                bodyFontSize: 34,
-                displayColors: true,
+                backgroundColor: '#000',
+                bodyFontColor: '#FFF',
+                bodyFontSize: 20,
+                displayColors: false,
             },
             legend: {
                 position: 'bottom',

@@ -1,6 +1,126 @@
 {% extends 'base.html' %}
-{% block content %}
+{% load static %}
+{% block homecontent %}
 
-<h1>Home</h1>
+<section class="white lighten-5">
+    <div class="container valign-wrapper">
+        <div class="slider">
+            <ul class="slides white lighten-5">
+                <li>
+                    <img src="{% static '/images/slider1.png' %}" class="hide-on-small-only img-responsive">
+                    <div class="caption left-align">
+                        <h3 class="black-text">Effortlessly stay on top of bills</h3>
+                        <h5 class="black-text">A bird's eye view on your monthly bills. You'll be able to see your upcoming bills, your spending categories and how it all relates to your monthly budget</h5>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'dashboard' %}" class="btn-small pink lighten-3 z-depth-0">View Dashboard</a>
+                        {% else %}
+                        <a href="{% url 'signup' %}" class="btn-small pink lighten-3 z-depth-0">Get Started</a>
+                        {% endif %}
+                    </div>
+                </li>
+                <li>
+                    <img src="{% static '/images/slider2.png' %}" class="hide-on-small-only">
+                    <div class="caption left-align">
+                        <h3 class="black-text">Budgets made simple</h3>
+                        <h5 class="black-text"">Easily create budgets, and see our suggestions based on your spending.</h5>
+                        {% if user.is_authenticated %}
+                        <a href=" {% url 'bills' %}" class="btn-small pink lighten-3 z-depth-0">View Bills</a>
+                            {% else %}
+                            <a href="{% url 'signup' %}" class="btn-small pink lighten-3 z-depth-0">Get Started</a>
+                            {% endif %}
+                    </div>
+                </li>
+                <li>
+                    <img src="{% static '/images/slider3.png' %}" class="hide-on-small-only">
+                    <div class="caption left-align ">
+                        <h3 class="black-text">It’s all coming together</h3>
+                        <h5 class="black-text">When you’re on top of your money, life is good. We help you effortlessly manage your finances in one place.</h5>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'categories' %}" class="btn-small pink lighten-3 z-depth-0">View Categories</a>
+                        {% else %}
+                        <a href="{% url 'signup' %}" class="btn-small pink lighten-3 z-depth-0">Get Started</a>
+                        {% endif %}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section class="grey lighten-5">
+    <div class="container center instructions">
+        <h4 class="pink-text text-lighten-3">HOW PYGG WORKS</h4>
+        <div class="row">
+            <div class="col s12 l4">
+                <i class="material-icons medium">note_add</i>
+                <h4>Enter your monthly budget and bills</h4>
+                <p>Sign up for an account and enter your monthly budget. From there, go ahead and start entering your bills.</p>
+            </div>
+            <div class="col s12 l4">
+                <i class="material-icons medium">devices</i>
+                <h4>Monitor your balances and adjust spending</h4>
+                <p>Use Pygg's features to keep a close eye on how much you're spending per month on bills and adjust your budget accordingly.</p>
+            </div>
+            <div class="col s12 l4">
+                <i class="material-icons medium">sentiment_very_satisfied</i>
+                <h4>Treat yourself!<br>(or tighten your belt)</h4>
+                <p>We hope you have a positive balance to treat yourself to something nice. If you're over-budget, it's time to cut back!</p>
+            </div>
+        </div>
+        </ul>
+    </div>
+</section>
+<section class="white">
+    <div class="container center">
+        <div class="row">
+            <div class="col s12 l6">
+                <img src="{% static '/images/feat1.png' %}" class="feat-img">
+            </div>
+            <div class="col s12 l6 feat">
+                <h2>Dashboard view</h2>
+                <p>We bring together all of your accounts, bills and more, so you can conveniently manage your finances from one dashboard.</p>
+                {% if user.is_authenticated %}
+                <a href="{% url 'dashboard' %}" class="btn-small pink lighten-3 z-depth-0">View Dashboard</a>
+                {% else %}
+                <a href="{% url 'signup' %}" class="btn-small pink lighten-3 z-depth-0">Get Started</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 push-l6 l6">
+                <img src="{% static '/images/feat2.png' %}" class="feat-img">
+            </div>
+            <div class="col s12 pull-l6 l6 feat">
+                <h2>View all your bills</h2>
+                <p>Get a breakdown of all your monthly bills and sort them however you want. Pygg offers badges and color-coding to keep you organized.</p>
+                {% if user.is_authenticated %}
+                <a href=" {% url 'bills' %}" class="btn-small pink lighten-3 z-depth-0">View Bills</a>
+                {% else %}
+                <a href="{% url 'signup' %}" class="btn-small pink lighten-3 z-depth-0">Get Started</a>
+                {% endif %}
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col s12 l6">
+                <img src="{% static '/images/feat3.png' %}" class="feat-img">
+            </div>
+            <div class="col s12 l6 feat">
+                <h2>View your bill categories</h2>
+                <p>View all your monthly bills by category. If you notice that you're spending a lot more in particular category, find ways to balance your subscriptions and payments.</p>
+                {% if user.is_authenticated %}
+                <a href="{% url 'categories' %}" class="btn-small pink lighten-3 z-depth-0">View Categories</a>
+                {% else %}
+                <a href="{% url 'signup' %}" class="btn-small pink lighten-3 z-depth-0">Get Started</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var sliderEl = document.querySelectorAll('.slider');
+        M.Slider.init(sliderEl);
+    });
+</script>
 
 {% endblock %}
