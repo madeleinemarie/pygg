@@ -13,7 +13,8 @@
             {% if bills.count %}
             <canvas id="myChart" width="400" height="400"></canvas>
             {% else %}
-            <h2><a href="{% url 'bills_create' %}">Add a bill to get started!</a></h2>
+            <h4>Add a bill to get started!</h4>
+            <a href="{% url 'bills_create' %}" class="btn-large pink lighten-3">Add Bill</a>
             {% endif %}
         </div>
     </div>
