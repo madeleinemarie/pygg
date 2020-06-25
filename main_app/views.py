@@ -69,7 +69,7 @@ def categoryList(request):
 
 @login_required
 def dashboard(request):
-    bills = Bill.objects.filter(user=request.user, paid=False)
+    bills = Bill.objects.filter(user=request.user, paid=False).order_by('dueDate')
     categories_total = {}
     for x in CATEGORIES:
         c = bills.filter(category=x[0])
@@ -116,7 +116,7 @@ def signup(request):
             info.user = user
             info.save()
             login(request, user)
-            return redirect('/')
+            return redirect('/dashboard/')
         else:
             error_message = 'Invalid sign up - try again'
     form = UserCreationForm()
