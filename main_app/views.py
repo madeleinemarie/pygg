@@ -66,7 +66,7 @@ def categoryList(request):
 
 @login_required
 def dashboard(request):
-    bills = Bill.objects.filter(user=request.user)
+    bills = Bill.objects.filter(user=request.user, paid=False)
     categories_total = {}
     for x in CATEGORIES:
         c = bills.filter(category=x[0])
