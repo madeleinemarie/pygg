@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import UserInfoForm
 from .models import User, Bill, UserInfo, CATEGORIES
 from django.db.models import Sum, Count
@@ -9,7 +11,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.utils import timezone
 import datetime
 
-class BillList(ListView):
+class BillList(LoginRequiredMixin, ListView):
     model = Bill
     template_name = 'main_app/bills.html'
     def get_queryset(self):
@@ -19,14 +21,14 @@ class BillList(ListView):
         else:
             return Bill.objects.filter(user=self.request.user, paid=False).order_by('dueDate')
 
-class BillDetail(DetailView):
+class BillDetail(LoginRequiredMixin, DetailView):
     model = Bill
     def get_context_data(self, **kwargs):
         context = super(DetailView, self).get_context_data(**kwargs)
         context['same_category'] = Bill.objects.filter(category=self.object.category).exclude(pk=self.object.id)
         return context
 
-class BillCreate(CreateView):
+class BillCreate(LoginRequiredMixin, CreateView):
     model = Bill
     fields = ['name', 'description', 'amount', 'dueDate', 'category']
     success_url = '/bills/'
@@ -34,18 +36,19 @@ class BillCreate(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class BillUpdate(UpdateView):
+class BillUpdate(LoginRequiredMixin, UpdateView):
     model = Bill
     fields = ['name', 'description', 'amount', 'dueDate', 'category']
     success_url = '/bills/'
 
-class BillDelete(DeleteView):
+class BillDelete(LoginRequiredMixin, DeleteView):
     model = Bill
     success_url = '/bills/'
 
 def home(request):
     return render(request, 'home.html')
 
+@login_required
 def categoryList(request):
     bills = Bill.objects.filter(user=request.user)
     categories_total = {}
@@ -61,6 +64,7 @@ def categoryList(request):
     }
     return render(request, 'main_app/categories.html', context)
 
+@login_required
 def dashboard(request):
     bills = Bill.objects.filter(user=request.user)
     categories_total = {}
@@ -77,16 +81,19 @@ def dashboard(request):
     }
     return render(request, 'dashboard.html', context)
 
+@login_required
 def mark_paid(request, pk):
     bill = Bill.objects.get(id=pk)
     bill.paid = True
     bill.save()
     return redirect('/bills/')
 
+@login_required
 def paid_list(request):
     paid_bills = Bill.objects.filter(user=request.user, paid=True)
     return render(request, 'main_app/paid.html', { 'paid_bills' : paid_bills })
 
+@login_required
 def budget_update(request):
     user_info = UserInfo.objects.get(user=request.user)
     form = UserInfoForm(request.POST, instance=user_info)
