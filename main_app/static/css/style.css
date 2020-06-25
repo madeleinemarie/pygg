@@ -8,16 +8,14 @@ body {
     flex-direction: column;
   }
 
-  main {
-    margin-top: 40px;
+main {
     flex: 1 0 auto;
+    margin: 40px 0;
   }
-
 
 h1, h2, h3, h4 {
     font-weight: 700 !important;
 }
-
 
 tr.bill-row td:nth-child(2) {
     width: 175px !important;
@@ -35,6 +33,28 @@ tr.bill-row td:last-child {
     margin-top: 40px;
 }
 
+.divider {
+    margin: 50px 0;
+}
+
+.feat-img {
+    width: 100%;
+}
+
+.instructions {
+    padding: 30px 0;
+    margin-top: 60px !important;
+    margin-bottom: 60px !important;
+}
+
+.feat {
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    justify-content: center;
+    align-items: center;
+}
+
 .footer-logo {
     width: 300px;
 }
@@ -50,6 +70,18 @@ tr.bill-row td:last-child {
     border-radius: 10px !important;
     transform: translateY(-6px);
     padding: 0 15px !important;
+}
+
+
+.slider .indicators {
+    display: none;
+}
+
+
+.caption {
+    max-width: 600px !important;
+    left: 0 !important;
+    transform: translate(50px) !important;
 }
 
 td#category-color {
@@ -88,5 +120,14 @@ h2.details-amount {
 }
 
 @media (max-width:728px) {
+
+    .feat {
+        height: 100%;
+    }
+    
+
+    .slides {
+        height: 400px !important;
+    }
 
 }
