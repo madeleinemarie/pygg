@@ -121,6 +121,10 @@ h2.details-amount {
     margin: 0 0 15px 0 !important;
 }
 
+form {
+    width: 60%;
+}
+
 form > p {
     margin-top: 50px;
 }

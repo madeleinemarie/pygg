@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 <form action="" method="post">
+    <h1>Update budget</h1>
     {% csrf_token %}
-    <table>
-      {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit!" class="btn">
+      {{ form.as_p }}
+    <input type="submit" value="Submit!" class="btn-large pink lighten-3">
   </form>
 {% endblock %}
