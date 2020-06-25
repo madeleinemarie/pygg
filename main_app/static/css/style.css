@@ -134,6 +134,17 @@ form > p > input:focus {
     box-shadow: 0 1px 0 0 pink !important;
   }
 
+form > p > textarea {
+    height: 75px;
+    resize: none;
+}
+
+form > p > textarea:focus {
+    outline: none;
+    border: 1px solid pink !important;
+    box-shadow: 1px pink !important;
+  }
+
 form > p > label {
     font-size: 2rem;
     font-weight: 700;
