@@ -25,7 +25,7 @@ class BillDetail(LoginRequiredMixin, DetailView):
     model = Bill
     def get_context_data(self, **kwargs):
         context = super(DetailView, self).get_context_data(**kwargs)
-        context['same_category'] = Bill.objects.filter(category=self.object.category).exclude(pk=self.object.id)
+        context['same_category'] = Bill.objects.filter(user=self.request.user, category=self.object.category).exclude(pk=self.object.id)
         return context
 
 class BillCreate(LoginRequiredMixin, CreateView):
