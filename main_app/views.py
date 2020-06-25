@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import UserInfoForm
 from .models import User, Bill, UserInfo, CATEGORIES
 from django.db.models import Sum, Count
@@ -23,6 +23,9 @@ class BillList(LoginRequiredMixin, ListView):
 
 class BillDetail(LoginRequiredMixin, DetailView):
     model = Bill
+    def get_queryset(self):
+        queryset = super(BillDetail, self).get_queryset()
+        return queryset.filter(user=self.request.user)
     def get_context_data(self, **kwargs):
         context = super(DetailView, self).get_context_data(**kwargs)
         context['same_category'] = Bill.objects.filter(user=self.request.user, category=self.object.category).exclude(pk=self.object.id)
