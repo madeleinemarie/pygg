@@ -25,9 +25,9 @@
                         <h5 class="black-text"">Easily create budgets, and see our suggestions based on your spending.</h5>
                         {% if user.is_authenticated %}
                         <a href=" {% url 'bills' %}" class="btn-small pink lighten-3 z-depth-0">View Bills</a>
-                        {% else %}
-                        <a href="{% url 'signup' %}" class="btn-small pink lighten-3 z-depth-0">Get Started</a>
-                        {% endif %}
+                            {% else %}
+                            <a href="{% url 'signup' %}" class="btn-small pink lighten-3 z-depth-0">Get Started</a>
+                            {% endif %}
                     </div>
                 </li>
                 <li>
@@ -49,23 +49,23 @@
 <section class="grey lighten-5">
     <div class="container center instructions">
         <h4 class="pink-text text-lighten-3">HOW PYGG WORKS</h4>
-            <div class="row">
-                <div class="col s12 l4">
-                    <i class="material-icons medium">note_add</i>
-                    <h4>Enter your monthly budget and bills</h4>
-                    <p>Sign up for an account and enter your monthly budget. From there, go ahead and start entering your bills.</p>
-                </div>
-                <div class="col s12 l4">
-                    <i class="material-icons medium">devices</i>
-                    <h4>Monitor your balances and adjust spending</h4>
-                    <p>Use Pygg's features to keep a close eye on how much you're spending per month on bills and adjust your budget accordingly.</p>
-                </div>
-                <div class="col s12 l4">
-                    <i class="material-icons medium">sentiment_very_satisfied</i>
-                    <h4>Treat yourself!<br>(or tighten your belt)</h4>
-                    <p>We hope you have a positive balance to treat yourself to something nice. If you're over-budget, it's time to cut back!</p>
-                </div>
+        <div class="row">
+            <div class="col s12 l4">
+                <i class="material-icons medium">note_add</i>
+                <h4>Enter your monthly budget and bills</h4>
+                <p>Sign up for an account and enter your monthly budget. From there, go ahead and start entering your bills.</p>
             </div>
+            <div class="col s12 l4">
+                <i class="material-icons medium">devices</i>
+                <h4>Monitor your balances and adjust spending</h4>
+                <p>Use Pygg's features to keep a close eye on how much you're spending per month on bills and adjust your budget accordingly.</p>
+            </div>
+            <div class="col s12 l4">
+                <i class="material-icons medium">sentiment_very_satisfied</i>
+                <h4>Treat yourself!<br>(or tighten your belt)</h4>
+                <p>We hope you have a positive balance to treat yourself to something nice. If you're over-budget, it's time to cut back!</p>
+            </div>
+        </div>
         </ul>
     </div>
 </section>
@@ -98,7 +98,7 @@
                 <a href="{% url 'signup' %}" class="btn-small pink lighten-3 z-depth-0">Get Started</a>
                 {% endif %}
             </div>
-            
+
         </div>
         <div class="row">
             <div class="col s12 l6">

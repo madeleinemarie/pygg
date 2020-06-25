@@ -22,7 +22,7 @@ tr.bill-row td:nth-child(2) {
 }
 
 tr.bill-row td:last-child {
-    width: 75px !important;
+    width: 125px !important;
 }
 
 #user-panel {
