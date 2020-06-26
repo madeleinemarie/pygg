@@ -53,7 +53,7 @@ def home(request):
 
 @login_required
 def categoryList(request):
-    bills = Bill.objects.filter(user=request.user)
+    bills = Bill.objects.filter(user=request.user, paid=False)
     categories_total = {}
     for x in CATEGORIES:
         c = bills.filter(category=x[0])
